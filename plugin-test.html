@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Plugin Tests</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <link href="plugin-styles.css" rel="stylesheet">
+    <style>
+      body{
+        font-size:16px;
+      }
+
+      .plugin h1{
+        margin-left:1em;
+      }
+
+      .plugin .content{
+        margin-left:2.5em;
+      }
+
+      .plugin h3{
+        margin-top:1.5em;
+      }
+    </style>
+  </head>
+  <body>
+
+    <div class="plugin" id="customdropdowns">
+      <h1>Custom Dropdown</h1>
+      <div class="content">
+        <div class="before">
+          <h3>Before</h3>
+          <select name="outlyingTerritory">
+            <option value="AS">American Samoa</option>
+            <option value="GU">Guam</option>
+            <option value="MP">Northern Mariana Islands</option>
+            <option value="PR">Puerto Rico</option>
+            <option value="UM">United States Minor Outlying Islands</option>
+            <option value="VI">Virgin Islands</option>
+          </select>
+        </div>
+        <div class="after">
+          <h3>After</h3>
+          <!-- Insert Dropdown div here -->
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>
