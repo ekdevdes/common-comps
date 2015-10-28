@@ -2,7 +2,7 @@
 
   var items = $('select[data-dropdown-container]'),
       containers = {},
-      htmlOpts = [];
+      htmlOpts = {};
 
   $.each(items, function(index, item){
 
@@ -13,7 +13,9 @@
 
   $.each(containers, function(index, item){
 
-    $("<div class='dropdown " + index + "' data-selected data-state='closed'><div class='control'></div><div class='opts'></div>").appendTo(item);
+    var $item = $("select[name=" + index.split("-")[1] + "]");
+
+    $("<div class='dropdown " + index + "' data-selected data-state='closed'><div class='control'><span>" + $item.data("default-val") + "</span></div><div class='opts'></div>").appendTo(item);
 
   });
 
@@ -27,13 +29,20 @@
         $.each(options, function(i, opt){
 
           var $opt = $(opt);
-          console.log($opt);
-          html += "<li data-name='" + $opt.text().toLowerCase().replace(" ", "") + "'>" + $opt.text() + "</li>";
+          html += "<li data-name='" + $opt.text().toLowerCase().replace(/\s/g, "") + "'>" + $opt.text() + "</li>";
 
         });
         html += "</ul>";
 
-        htmlOpts.push(html);
+    htmlOpts["dropdown-" + $item.attr("name")] = html;
+  });
+
+  $.each(containers, function(index, item){
+
+    var html = htmlOpts[index];
+
+    $(html).appendTo(item + " ." + index + " .opts");
+
   });
 
 }(jQuery));
