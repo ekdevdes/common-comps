@@ -1,0 +1,53 @@
+.dropdown li:first-child {
+    margin-top: 0;
+    padding: 1em;
+}
+.dropdown ul {
+    padding-left: 0;
+}
+.dropdown ul li {
+    list-style: none;
+    text-align: center;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    border-bottom: 1px solid black;
+    width: 100%;
+    padding-bottom: 1em;
+}
+
+.dropdown .control {
+    padding: 1em 2em;
+    text-align: center;
+    position: relative;
+    cursor:pointer;
+}
+.dropdown {
+    margin-bottom: 20px;
+    margin-right: 20px;
+}
+
+.dropdown .control, .dropdown .opts {
+    border: 1px solid black;
+}
+
+.dropdown .opts {
+  border-left: 1px solid black;
+  border-right:1px solid black;
+  position: relative;
+  bottom:1px;
+  display:none;
+}
+
+.dropdown .control:after {
+    content: "\25be";
+    height: 100%;
+    display: table-cell;
+    position: absolute;
+    top: 0;
+    right: 0;
+    vertical-align: middle;
+    width: 50px;
+    font-size: 2.2em;
+    border-left: 1px solid black;
+    cursor:pointer;
+}

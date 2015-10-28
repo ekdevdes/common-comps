@@ -35,6 +35,10 @@
         html += "</ul>";
 
     htmlOpts["dropdown-" + $item.attr("name")] = html;
+
+    if($item.attr("data-keep") == undefined){
+      $(item).hide();
+    }
   });
 
   $.each(containers, function(index, item){
@@ -43,6 +47,14 @@
 
     $(html).appendTo(item + " ." + index + " .opts");
 
+  });
+
+  $('.dropdown .control').click(function(e){
+    e.preventDefault();
+
+    var $dropdown = $(this).parent();
+
+    return false;
   });
 
 }(jQuery));
