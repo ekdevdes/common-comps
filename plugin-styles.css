@@ -1,3 +1,8 @@
+body{
+  font-size:16px;
+}
+
+/* Custom Dropdown Basic Styles */
 .dropdown li:first-child {
     margin-top: 0;
     padding: 1em;
@@ -20,10 +25,21 @@
     text-align: center;
     position: relative;
     cursor:pointer;
+    user-select:none;
+    font-weight:bold;
+    -moz-user-select:none;
+    -webkit-user-select:none;
+    -ms-user-select:none;
+    -o-user-select:none;
 }
 .dropdown {
     margin-bottom: 20px;
     margin-right: 20px;
+}
+
+.dropdown,
+.dropdown .control{
+  position:relative;
 }
 
 .dropdown .control, .dropdown .opts {
@@ -33,9 +49,39 @@
 .dropdown .opts {
   border-left: 1px solid black;
   border-right:1px solid black;
-  position: relative;
-  bottom:1px;
+  position: absolute;
+  margin-top:-1px;
   display:none;
+  width:100%;
+  z-index:9999;
+}
+
+.dropdown .opts ul{
+  background:white;
+}
+
+.dropdown .opts ul li{
+  background:white;
+  cursor:pointer;
+  margin-bottom:0;
+  margin-top:0;
+  padding-top:10px;
+  padding-bottom:20px;
+  -moz-user-select:none;
+  -webkit-user-select:none;
+  -ms-user-select:none;
+  -o-user-select:none;
+  transition:all 0.3s ease-out;
+}
+
+.dropdown .opts ul li span{
+  position:relative;
+  top:5px;
+}
+
+.dropdown ul li:hover{
+  background:#1a1a1a;
+  color:white;
 }
 
 .dropdown .control:after {
@@ -50,4 +96,20 @@
     font-size: 2.2em;
     border-left: 1px solid black;
     cursor:pointer;
+}
+
+.dropdown .control:hover:after{
+  background:black;
+  border-left:1px solid white;
+  color:white;
+}
+
+@media only screen and (max-width: 900px) {
+/* Custom Dropdown Basic Styles */
+
+  .dropdown .control{
+    font-size:1.5vh;
+    padding-left:0;
+    padding-right:3.5em;
+  }
 }

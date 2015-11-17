@@ -29,7 +29,7 @@
         $.each(options, function(i, opt){
 
           var $opt = $(opt);
-          html += "<li data-name='" + $opt.text().toLowerCase().replace(/\s/g, "") + "'>" + $opt.text() + "</li>";
+          html += "<li data-name='" + $opt.text().toLowerCase().replace(/\s/g, "") + "'><span>" + $opt.text() + "</span></li>";
 
         });
         html += "</ul>";
@@ -52,7 +52,36 @@
   $('.dropdown .control').click(function(e){
     e.preventDefault();
 
-    var $dropdown = $(this).parent();
+    var $dropdown = $(this).parent(),
+        $control = $dropdown.find(".control"),
+        $opts = $dropdown.find(".opts");
+
+    if($dropdown.attr("data-state") == "closed") {
+      $opts.fadeIn("fast");
+
+      $dropdown.attr("data-state", "opened");
+    } else {
+      $opts.fadeOut("fast");
+
+      $dropdown.attr("data-state", "closed");
+    }
+
+    return false;
+  });
+
+  $('.dropdown .opts li').click(function(e){
+    e.preventDefault();
+
+    var $dropdown = $(this).parent().parent().parent(),
+        $opts = $dropdown.find(".opts");
+
+    // capture clicked on element in a variable
+
+    $opts.fadeOut("fast");
+    $dropdown.attr("data-state", "closed");
+
+    // set value of hidden select to selected item
+    // set the shown value of the dropdown to the selected element
 
     return false;
   });
