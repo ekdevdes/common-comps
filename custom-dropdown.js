@@ -1,36 +1,58 @@
 (function($){
   // gathering the select's to transform
-  var items = $('select[data-dropdown-container]'),
+  var items = $('select[data-dropdown-options]'),
+      options = {},
       containers = {},
       htmlOpts = {};
 
-  // building selects
+  // building selects and set up option parsing
   $.each(items, function(index, item){
 
-    var $currentItem = $(item);
+    var $currentItem = $(item),
+        itemName = "dropdown-" + $currentItem.attr("name")
+        rawOptions = $currentItem.attr('data-dropdown-options').split(","),
+        opts = {};
+
+    $.each(rawOptions, function(index, item){
+        var key = item.split("=")[0].trim(),
+            val = item.split("=")[1];
+
+        if(key == "keep"){
+          if(val.toLowerCase() == "yes" || val.toLowerCase() == "true" || val.toLowerCase() == "keep") {
+              opts[key.toLowerCase()] = "true";
+          } else {
+            opts[key.toLowerCase()] = "false";
+          }
+        }else{
+          opts[key.toLowerCase()] = val;
+        }
+    });
+
+    options[itemName] = opts;
 
     containers["dropdown-" + $currentItem.attr("name")] = $currentItem.data("dropdown-container");
   });
 
   $.each(containers, function(index, item){
 
-    var $item = $("select[name=" + index.split("-")[1] + "]");
+    var opts = options[index];
 
-    $("<div class='dropdown " + index + "' data-selected data-state='closed'><div class='control'><span>" + $item.data("default-val") + "</span></div><div class='opts'></div>").appendTo(item);
+    $("<div class='dropdown " + index + "' data-selected data-state='closed'><div class='control'><span>" + opts.defaultval + "</span></div><div class='opts'></div>").appendTo(opts["container"]);
 
   });
 
   $.each(items, function(index, item){
 
     var $item = $(item),
-        options = $item.children(),
+        choices = $item.children(),
         html = "",
         dropdownName = "dropdown-" + $item.attr("name");
 
         html += "<ul>";
-        $.each(options, function(i, opt){
+        $.each(choices, function(i, opt){
 
           var $opt = $(opt);
+
           html += "<li data-name='" + $opt.text().toLowerCase().replace(/\s/g, "") + "'><span>" + $opt.text() + "</span></li>";
 
         });
@@ -38,16 +60,14 @@
 
     htmlOpts[dropdownName] = html;
 
-    if($item.attr("data-keep") == undefined){
-      $(item).hide();
+    if(options[dropdownName].keep != "true"){
+      $item.hide();
     }
   });
 
   $.each(containers, function(index, item){
 
-    var html = htmlOpts[index];
-
-    $(html).appendTo(item + " ." + index + " .opts");
+    $(htmlOpts[index]).appendTo('.' + index + ' .opts');
 
   });
 
