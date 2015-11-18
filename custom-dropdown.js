@@ -142,26 +142,37 @@
   $.each(items, function(index, item){
 
     var $item = $(item),
-        dropdownName = "dropdown-" + $item.attr("name");
+        dropdownName = "dropdown-" + $item.attr("name"),
+        opts = options[dropdownName];
 
-    if($item.attr("data-selected-val") !== undefined &&
-        $item.attr("data-selected-val") != ""){
+    if(opts.selectedval !== undefined &&
+        opts.selectedval != ""){
 
-        var selectedItem = $item.attr("data-selected-val"),
+        var selectedItem = opts.selectedval,
             $dropdown = $(" ." + dropdownName),
-            $selectedOption = $dropdown.find('li[data-name=' + selectedItem + ']'),
-            selectedText = $selectedOption.html().replace(/(<([^>]+)>)/ig,"");
+            $selectedOption, selectedText;
+
+        $.each($dropdown.find('li'), function(index, item){
+
+          var $item = $(item),
+              text = $(item).text().replace(/(<([^>]+)>)/ig,"");
+
+          $item.removeClass("selected");
+
+          if(text == selectedText){
+            $selectedOption = $item;
+            selectedText = $selectedOption.text().replace(/(<([^>]+)>)/ig,"");
+          }
+
+        });
+
+        console.log($selectedOption, selectedText);
 
         // set the title of the custom dropdown to the item to be selected
         $dropdown.find('.control span').text(selectedText);
 
-        // remove the "selected" class from all the options in the custom select
-        $.each($dropdown.find("li"), function(index, item){
-          $(item).removeClass("selected");
-        });
-
         // apply the class of "selected" to selected li
-        $selectedOption.addClass("selected");
+        // $selectedOption.addClass("selected");
 
         // set the original select's value to the selected value in custom dropdown and remove the "selected" attribute from
         // any other option in original selected that doesn't match the selected value in custom dropdown
