@@ -1,5 +1,4 @@
 (function($){
-
   // gathering the select's to transform
   var items = $('select[data-dropdown-container]'),
       containers = {},
@@ -25,7 +24,8 @@
 
     var $item = $(item),
         options = $item.children(),
-        html = "";
+        html = "",
+        dropdownName = "dropdown-" + $item.attr("name");
 
         html += "<ul>";
         $.each(options, function(i, opt){
@@ -36,7 +36,7 @@
         });
         html += "</ul>";
 
-    htmlOpts["dropdown-" + $item.attr("name")] = html;
+    htmlOpts[dropdownName] = html;
 
     if($item.attr("data-keep") == undefined){
       $(item).hide();
@@ -82,6 +82,11 @@
         $origSelect = $('select[name="' + origSelectName + '"]'),
         selectionText = $selection.html().replace(/(<([^>]+)>)/ig,"");
 
+    // remove the class of "selected" from all options in custom select
+    $.each($dropdown.find("li"), function(index, item){
+      $(item).removeClass("selected");
+    });
+
     // give a class to the selected element to identify it as selected so we can style it like so
     $selection.addClass("selected");
 
@@ -89,11 +94,14 @@
     $opts.fadeOut("fast");
     $dropdown.attr("data-state", "closed");
 
-    // set value of hidden select to selected item
+    // set value of hidden select to selected item and remove "selected" attribute from all options
+    // in original select that don't match the selected value in the custom dropdown
     $.each($origSelect.children(), function(index, option){
 
       var $option = $(option),
           optionText = $option.html();
+
+      $option.removeAttr("selected");
 
       if(optionText == selectionText) {
         $option.attr("selected", "selected");
@@ -108,6 +116,47 @@
     $dropdown.find(".control span").text(selectionText);
 
     return false;
+  });
+
+  // set the option whose identifier has been specified through the original select's data-selected-val attribute
+  $.each(items, function(index, item){
+
+    var $item = $(item),
+        dropdownName = "dropdown-" + $item.attr("name");
+
+    if($item.attr("data-selected-val") !== undefined &&
+        $item.attr("data-selected-val") != ""){
+
+        var selectedItem = $item.attr("data-selected-val"),
+            $dropdown = $(" ." + dropdownName),
+            $selectedOption = $dropdown.find('li[data-name=' + selectedItem + ']'),
+            selectedText = $selectedOption.html().replace(/(<([^>]+)>)/ig,"");
+
+        // set the title of the custom dropdown to the item to be selected
+        $dropdown.find('.control span').text(selectedText);
+
+        // remove the "selected" class from all the options in the custom select
+        $.each($dropdown.find("li"), function(index, item){
+          $(item).removeClass("selected");
+        });
+
+        // apply the class of "selected" to selected li
+        $selectedOption.addClass("selected");
+
+        // set the original select's value to the selected value in custom dropdown and remove the "selected" attribute from
+        // any other option in original selected that doesn't match the selected value in custom dropdown
+        $.each($item.children(), function(index, option){
+
+          var $option = $(option),
+              optionText = $option.html();
+
+          $option.removeAttr("selected");
+
+          if(optionText == selectedText) {
+            $option.attr("selected", "selected");
+          }
+        });
+    }
   });
 
 }(jQuery));
