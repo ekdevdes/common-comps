@@ -159,20 +159,18 @@
 
           $item.removeClass("selected");
 
-          if(text == selectedText){
+          if(text == selectedItem){
             $selectedOption = $item;
             selectedText = $selectedOption.text().replace(/(<([^>]+)>)/ig,"");
           }
 
         });
 
-        console.log($selectedOption, selectedText);
-
         // set the title of the custom dropdown to the item to be selected
         $dropdown.find('.control span').text(selectedText);
 
         // apply the class of "selected" to selected li
-        // $selectedOption.addClass("selected");
+        $selectedOption.addClass("selected");
 
         // set the original select's value to the selected value in custom dropdown and remove the "selected" attribute from
         // any other option in original selected that doesn't match the selected value in custom dropdown
