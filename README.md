@@ -59,7 +59,7 @@ It's important to note that there are no quotes used around the selector passed 
 |Option|Description|Possible Values|
 |:-----|:----------|:--------------|
 |`container` **required** | The element to place the generated custom dropdown in | Any selector that matches jQuery element selector syntax, without quotes
-|`defaultval` (optional) | By default, no option in the dropdown is selected. This option determines what text should be on the dropdown as the "selected" value in this case| Any string, without quotes
+|`defaultval` (optional) | By default, no option in the dropdown is selected. This option determines what text should be on the dropdown as the "selected" value in this case| Any string, without quotes. Default value is "Choose an Option"
 |`selectedval` (optional) | Set one of the options in the dropdown to be selected automatically when the page loads, useful for pre-loading existing configuration options for a service onto a single page | Any string, without quotes
 |`keep` (optional) | By default when this plugin is applied to the desired `select`, it hides the `select` that it just created a custom dropdown for, however you can change this and tell the plugin to not hide the original `select` after creating a custom dropdown for it with this option | "keep","yes","true","false", or "no"
 ### Styling
@@ -67,7 +67,7 @@ This plugin was designed to be completely customizable via CSS. A few styles nee
 
 |Selector| What it Affects|
 |:-------|:---------------|
-|`.dropdown`, `.dropdown .control`| The custom dropdown menu when its closed 
+|`.dropdown`, `.dropdown .control`| The custom dropdown menu when its closed
 |`.dropdown .control .span` | the `span` within the closed state of the custom dropdown that states what option is currently selected
 |`.dropdown .control` | The custom dropdown menu when its closed. However, if you want to remove or change the color of the default black border around the closed-state of the custom dropdown you'll want to apply your `border:none`or other `border`-related CSS to this selector. If you want to remove the border on the left of the arrow of the closed-state custom dropdown then you'll want to apply that `border:none` to `.dropdown .control:after`. It possible to have different hover states for the closed-state custom dropdown and the arrow on the right, just make sure that you apply the `:hover` to `.dropdown .control` instead of `.dropdown`
 | `.dropdown .control:after`| the arrow that opens the custom dropdown's full option list. The background color of the box the arrow is in can be changed using `.dropdown .control:hover:after` if you put ":hover" after ":after" it won't work...I already tried. To remove the border on the left of the arrow  or change its color this is the selector that you want to put your `border:none` or other `border`-related CSS in.

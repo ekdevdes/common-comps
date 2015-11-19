@@ -37,6 +37,10 @@
 
     var opts = options[index];
 
+    if(opts.defaultval == undefined){
+      opts.defaultval = "Choose an Option";
+    }
+
     $("<div class='dropdown " + index + "' data-selected data-state='closed'><div class='control'><span>" + opts.defaultval + "</span></div><div class='opts'></div>").appendTo(opts["container"]);
 
   });
