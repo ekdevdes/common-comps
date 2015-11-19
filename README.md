@@ -62,6 +62,14 @@ It's important to note that there are no quotes used around the selector passed 
 |`defaultval` (optional) | By default, no option in the dropdown is selected. This option determines what text should be on the dropdown as the "selected" value in this case| Any string, without quotes. Default value is "Choose an Option"
 |`selectedval` (optional) | Set one of the options in the dropdown to be selected automatically when the page loads, useful for pre-loading existing configuration options for a service onto a single page | Any string, without quotes
 |`keep` (optional) | By default when this plugin is applied to the desired `select`, it hides the `select` that it just created a custom dropdown for, however you can change this and tell the plugin to not hide the original `select` after creating a custom dropdown for it with this option | "keep","yes","true","false", or "no"
+
+You've seen the syntax for one option above, here is the syntax for specifying multiple options:
+```html
+<select name="outlyingTerritoryTwo" data-dropdown-options="container=.after, defaultval=Choose a State, selectedval=American Samoa">
+...options...
+</select>
+```
+
 ### Styling
 This plugin was designed to be completely customizable via CSS. A few styles need be applied by default to get the custom dropdown looking like a dropdown menu but you can override almost all of these pre-defined styles with your own. Additionally, Below is a list of selectors and what they affect
 
