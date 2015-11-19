@@ -69,6 +69,7 @@ You've seen the syntax for one option above, here is the syntax for specifying m
 ...options...
 </select>
 ```
+The space after the comma between option and the case of the option names don't matter.
 
 ### Styling
 This plugin was designed to be completely customizable via CSS. A few styles need be applied by default to get the custom dropdown looking like a dropdown menu but you can override almost all of these pre-defined styles with your own. Additionally, Below is a list of selectors and what they affect
