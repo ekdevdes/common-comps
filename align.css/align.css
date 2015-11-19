@@ -1,0 +1,32 @@
+.alignContainer{
+  overflow:hidden;
+}
+
+.alignContainer .alignNormal.left{
+  float:left;
+  width:50%;
+}
+
+.alignContainer .alignNormal.right{
+  float:right;
+  width:50%;
+}
+
+.alignContainer .alignLeft.left{
+  float:left;
+  width:50%;
+  padding-right:30px;
+}
+
+.alignContainer .alignLeft.right{
+  padding-top:1px;
+}
+
+@media only screen and (max-width: 900px){
+  .align .alignNormal.left,
+  .align .alignNormal.right,
+  .align .alignLeft.left{
+    float:none;
+    width:100%;
+  }
+}
